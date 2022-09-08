@@ -66,6 +66,7 @@ public class Humain {
                         "Nom : " + nom + "\n" +
                         "Age : " + age + "\n" +
                         "Poids : " + poids + "\n" +
+                        "Esperance de vie : " + esperanceVie + "\n" +
                 "}");
     }
 }

@@ -46,6 +46,7 @@ class Population {
     }
 
     public void print() {
+        System.out.println("Population de " + pop.size() + " humains {\n");
         for (Humain h : pop){
             h.print();
         }

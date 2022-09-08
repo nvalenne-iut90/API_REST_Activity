@@ -17,7 +17,7 @@ public class Femme extends Humain{
 
     public void vieillir() {
         age++;
-        if (age == 15) fertilite = (Humain.loto.nextInt()+1)%100;
+        if (age == 15) fertilite = (Humain.loto.nextInt(100));
         if (age <= 20) poids = 3+(int)(2.6*age);
         else if (age >= 50) poids += (age % 2);
     }
@@ -25,15 +25,16 @@ public class Femme extends Humain{
     public Humain rencontre (Homme h) {
         if (this.age > 15 && this.age < 50 && h.age > 15){
             if (this.poids < 150 && h.poids < 150){
-                int f = (Humain.loto.nextInt())%100;
+                int f = (Humain.loto.nextInt(100));
                 if (f < this.fertilite){
                     Humain enfant;
-                    int p = (Humain.loto.nextInt())%100;
+                    int p = (Humain.loto.nextInt(100));
                     if (p < 50)
                         enfant = new Homme(this.nom + " "+ h.nom);
                     else
                         enfant = new Femme(this.nom + " "+ h.nom);
-                    int g = (Humain.loto.nextInt())%20;
+                    enfant.setEsperanceVie();
+                    int g = (Humain.loto.nextInt(20));
                     this.poids += 10;
                     h.poids += g;
 
@@ -45,6 +46,6 @@ public class Femme extends Humain{
     }
 
     protected void setEsperanceVie() {
-        esperanceVie = 55 + (Humain.loto.nextInt())%35;
+        esperanceVie = 55 + (Humain.loto.nextInt(40));
     }
 }
