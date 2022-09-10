@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-class Population {
+public class Population {
 
     List<Humain> pop;
 
