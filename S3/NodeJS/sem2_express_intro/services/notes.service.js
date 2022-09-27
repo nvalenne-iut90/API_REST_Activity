@@ -39,7 +39,7 @@ const listerNotes = (callback) => {
     try {
         const dataBuffer = fs.readFileSync('notes.json')
         const dataJSON = dataBuffer.toString()
-        console.long(JSON.parse(dataJSON))
+        console.log(JSON.parse(dataJSON));
         return callback(null, JSON.parse(dataJSON));
     } catch (e) {
         console.log("error")

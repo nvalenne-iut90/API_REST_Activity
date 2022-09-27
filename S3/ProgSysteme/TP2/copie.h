@@ -1,0 +1,1 @@
+int copie(FILE *entree, FILE *sortie);

@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6056307e-cc2f-471c-829c-8a060dfbf143" name="Changes" comment="TP1 terminé (améliorations à faire)">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProgSysteme/TP2/binhexasc" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProgSysteme/TP2/binhexasc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProgSysteme/TP2/binhexasc.c" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProgSysteme/TP2/binhexasc.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProgSysteme/TP2/copyFIles.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProgSysteme/TP2/res.ascii" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProgSysteme/TP2/res.ascii" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProgSysteme/TP2/res.bin" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProgSysteme/TP2/res.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ProgSysteme/TP2/res.hex" beforeDir="false" afterPath="$PROJECT_DIR$/../../ProgSysteme/TP2/res.hex" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +84,9 @@
       <workItem from="1662651821820" duration="3815000" />
       <workItem from="1662656960199" duration="4149000" />
       <workItem from="1662965054222" duration="31000" />
-      <workItem from="1663097097191" duration="405000" />
+      <workItem from="1663097097191" duration="1000000" />
+      <workItem from="1663159358679" duration="316000" />
+      <workItem from="1663159688714" duration="110000" />
     </task>
     <task id="LOCAL-00001" summary="TP1 terminé (améliorations à faire)">
       <created>1662668841813</created>
