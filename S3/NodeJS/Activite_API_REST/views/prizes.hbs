@@ -2,15 +2,20 @@
 <h1>Prix Nobels</h1>
 <div class="container" id="listeLaureats" style="display: flex">
     <div class="col-3">
-        <select>
-            <optgroup label="category">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-            </optgroup>
-        </select>
+        <label for="listCategory">
+            <select>
+                <optgroup label="category">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                </optgroup>
+            </select>
+        </label>
     </div>
     <div class="col-9">
+        <div class="d-inline">
+            {{page}}
+        </div>
         <table class="table table-hover" style="text-align: center">
             <thead>
             <tr style="font-size: 20px;">
