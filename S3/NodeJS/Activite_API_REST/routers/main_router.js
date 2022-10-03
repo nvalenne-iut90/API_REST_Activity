@@ -1,5 +1,5 @@
 import express from "express";
-import {list, add, insert, listPaginatedLaureates} from "../controllers/main_controller.js";
+import {add, insert, listPaginatedLaureates} from "../controllers/main_controller.js";
 
 let router = express.Router();
 //localhost:3000/users/

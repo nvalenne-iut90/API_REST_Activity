@@ -1,7 +1,7 @@
 import FSPrizes from "../services/prizes-fs.service.js"
 import PrizesLaureatesService from "../services/prizes-laureates.service.js";
 
-
+/*
 export const list = (req, res) => {
     let service = new FSPrizes();
     service.listLaureates((error, laureates) => {
@@ -10,9 +10,11 @@ export const list = (req, res) => {
         }
         res.status(200);
         console.log(laureates);
-        res.render('prizes.hbs', {laureates} );
+        res.render('listLaureates.hbs', {laureates} );
     });
 }
+
+ */
 
 export const listPaginatedLaureates = (req, res) => {
     let service = new PrizesLaureatesService();
@@ -23,7 +25,7 @@ export const listPaginatedLaureates = (req, res) => {
             res.status(400).send({success:0,data:error});
         }
         res.status(200);
-        res.render('prizes.hbs', {laureates});
+        res.render('listLaureates.hbs',{laureates});
     });
 }
 
