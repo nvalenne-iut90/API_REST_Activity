@@ -4,7 +4,7 @@ import {default as routes} from "./routers/main_router.js";
 import {fileURLToPath} from "url";
 import {dirname} from "path";
 import dotenv from 'dotenv';
-import emoji from 'node-emoji'
+import emoji from 'node-emoji';
 dotenv.config();
 const port = process.env.PORT;
 
@@ -27,7 +27,6 @@ app.use("*", (req, res) => {
     let emojis = {
         "X" : emoji.get('x'),
         "question" : emoji.get('question')
-
     }
     res.render('error404.hbs', {emojis});
 })

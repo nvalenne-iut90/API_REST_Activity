@@ -2,25 +2,38 @@
 <div class="container" id="listeLaureats" style="display: flex">
     <div class="col-9">
         <div class="d-inline">
-            {{page}}
         </div>
         <table class="table table-hover" style="text-align: center">
-            <thead>
-            <tr style="font-size: 20px;">
-                <th>#</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-            </tr>
-            </thead>
-            <tbody>
+            {{#if laureates}}
+                <thead>
+                <tr style="font-size: 20px;">
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                </tr>
+                </thead>
+                <tbody>
                 {{#each laureates}}
-                        <tr>
-                            <td>{{this.id}}</td>
-                            <td>{{this.surname}}</td>
-                            <td>{{this.firstname}}</td>
-                        </tr>
+                    <tr>
+                        <td>{{this.id}}</td>
+                        <td>{{this.surname}}</td>
+                        <td>{{this.firstname}}</td>
+                    </tr>
                 {{/each}}
-            </tbody>
+                </tbody>
+            {{else}}
+                <thead>
+                <tr style="font-size: 20px;">
+                    <th>ID non trouvé</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nous n'avons pas trouvé ce que vous cherchez...</td>
+                    </tr>
+                </tbody>
+            {{/if}}
         </table>
     </div>
 </div>
+
