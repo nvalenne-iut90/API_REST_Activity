@@ -1,15 +1,16 @@
-// Template engine and express imports
+// Modules npm
 import express from "express";
 import {engine} from "express-handlebars";
+import {dirname} from "path";
+import dotenv from 'dotenv';
+import emoji from 'node-emoji';
 
-// Routes
+// Router files
 import {default as router_laureates} from "./routers/laureates_router.js";
 import {default as router_prizes} from "./routers/prizes_router.js";
 
 import {fileURLToPath} from "url";
-import {dirname} from "path";
-import dotenv from 'dotenv';
-import emoji from 'node-emoji';
+
 dotenv.config();
 const port = process.env.PORT;
 
@@ -26,7 +27,10 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 app.use(express.static(__dirname + "/public"));
 
-app.get("/", (req,res) => res.render('accueil.hbs'))
+app.get("/", (req,res) => {
+    let emoji_welcome = emoji.get('wave');
+    res.render('accueil.hbs', {emoji_welcome});
+});
 
 app.use("/laureates", router_laureates);
 app.use("/prizes", router_prizes);

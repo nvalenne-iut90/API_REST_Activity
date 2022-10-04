@@ -1,9 +1,9 @@
 import express from "express";
-import {listCategorizedLaureates} from "../controllers/prizes_controller.js";
+import {listCategories} from "../controllers/prizes_controller.js";
 
 let router_prizes = express.Router();
 
-router_prizes.get("/", listCategorizedLaureates);
+router_prizes.get("/", listCategories);
 
 //router.get("/add", add);
 //router.post("/add", validatePrize,insert);

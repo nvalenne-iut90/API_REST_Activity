@@ -1,7 +1,7 @@
 import fs from "fs"
-import {AbstractPrizes, Prize} from "../models/main_models.js";
+import {Prize} from "../models/main_models.js";
 
-export default class FSPrizes extends AbstractPrizes{
+export default class FSPrizes{
     async listLaureates(callback){
         const prizes = await this.readAllPrizes();
         if (prizes.length === 0){

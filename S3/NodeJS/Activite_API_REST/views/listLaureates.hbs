@@ -1,23 +1,23 @@
-<h1>Liste des lauréats</h1>
-<div class="container" id="listeLaureats" style="display: flex;min-width: 940px">
-    <div class="col-9">
+<div class="container" id="listeLaureats" style="display: flex;flex-direction: column">
+    <h1>Liste des lauréats</h1>
+    <div class="col-12">
         <div class="d-inline">
         </div>
-        <table class="table table-hover" style="text-align: center">
+        <table class="table table-striped table-responsive table-bordered" style="text-align: center">
             {{#if laureates}}
-                <thead>
+                <thead class="th">
                 <tr style="font-size: 20px;">
-                    <th>#</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
+                    <th class="id">#</th>
+                    <th class="surname">Nom</th>
+                    <th class="firstname">Prénom</th>
                 </tr>
                 </thead>
                 <tbody>
                 {{#each laureates}}
                     <tr>
-                        <td>{{this.id}}</td>
-                        <td>{{this.surname}}</td>
-                        <td>{{this.firstname}}</td>
+                        <td class="id">{{this.id}}</td>
+                        <td class="surname">{{this.surname}}</td>
+                        <td class="firstname">{{this.firstname}}</td>
                     </tr>
                 {{/each}}
                 </tbody>

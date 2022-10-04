@@ -2,8 +2,12 @@ import PrizesLaureatesService from "../services/prizes-laureates.service.js";
 
 export const listPaginatedLaureates = (req, res) => {
     let service = new PrizesLaureatesService();
-    const page = req.query.page;
+    let page = req.query.page;
     const limit = 10;
+    if (page === undefined || page === ""){
+        page = 1;
+    }  // if page is not defined => display the content of page 1
+
     service.getPaginatedLaureates(page, limit, (error, laureates) => {
         if (error){
             res.status(400).send({success:0,data:error});

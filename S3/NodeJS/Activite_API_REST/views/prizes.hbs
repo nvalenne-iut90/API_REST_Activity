@@ -1,12 +1,26 @@
 <div class="container">
-        <select class="select">
-            <optgroup label="categories">
-                <option label="chemistry">Chimie</option>
-                <option label="economics"></option>
-                <option label="literature">Littérature</option>
-                <option label="medicine">Médecine</option>
-                <option label="peace">Paix</option>
-                <option label="physics">Physique</option>
-            </optgroup>
-        </select>
+    <div>
+        <div class="col-3">
+            {{#if categories}}
+                <label for="categories"><em>Catégorie du prix Nobel</em></label>
+                <select class="form-select">
+                    <optgroup label="Catégories">
+                        <option selected disabled style="font-style: italic">Choisir une catégorie</option>
+                        {{#each categories}}
+                            <option value="{{this}}">{{this}}</option>
+                        {{/each}}
+                    </optgroup>
+                </select>
+            {{/if}}
+        </div>
+        <div class="col-9">
+
+        </div>
+    </div>
+    <div>
+        <table class="table-hover">
+
+        </table>
+    </div>
+
 </div>

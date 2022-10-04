@@ -1,5 +1,4 @@
 import FSPrizes from "./prizes-fs.service.js"
-import {showLaureateFromID} from "../controllers/laureates_controller.js";
 export default class PrizesLaureatesService {
     async getLaureates() {
         // Gets the content of the json file
@@ -22,8 +21,6 @@ export default class PrizesLaureatesService {
         return liste;
     }
     async getPaginatedLaureates(page, limit, callback){
-        if (page === undefined || page === "")  // if page is not defined => display the content of page 1
-            page = 1;
 
         const startIndex = (page - 1) * limit;  // first element to show in the page
         const endIndex = page * limit;          // last element to show in the page

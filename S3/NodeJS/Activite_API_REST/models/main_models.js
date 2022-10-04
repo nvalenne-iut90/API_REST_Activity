@@ -40,11 +40,4 @@ export class Prize{
 }
 
 
-export class AbstractPrizes {
-    async list(callback) {
-
-    }
-}
-
-
 
