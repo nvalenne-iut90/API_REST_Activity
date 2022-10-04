@@ -1,6 +1,11 @@
+// Template engine and express imports
 import express from "express";
 import {engine} from "express-handlebars";
-import {default as routes} from "./routers/main_router.js";
+
+// Routes
+import {default as router_laureates} from "./routers/laureates_router.js";
+import {default as router_prizes} from "./routers/prizes_router.js";
+
 import {fileURLToPath} from "url";
 import {dirname} from "path";
 import dotenv from 'dotenv';
@@ -21,7 +26,10 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 app.use(express.static(__dirname + "/public"));
 
-app.use("/", routes);
+app.get("/", (req,res) => res.render('accueil.hbs'))
+
+app.use("/laureates", router_laureates);
+app.use("/prizes", router_prizes);
 
 app.use("*", (req, res) => {
     let emojis = {

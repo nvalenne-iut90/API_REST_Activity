@@ -1,5 +1,5 @@
 import FSPrizes from "./prizes-fs.service.js"
-import {showLaureateFromID} from "../controllers/main_controller.js";
+import {showLaureateFromID} from "../controllers/laureates_controller.js";
 export default class PrizesLaureatesService {
     async getLaureates() {
         // Gets the content of the json file

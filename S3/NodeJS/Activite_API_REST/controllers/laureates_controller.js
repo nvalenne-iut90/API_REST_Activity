@@ -1,6 +1,4 @@
-import FSPrizes from "../services/prizes-fs.service.js"
 import PrizesLaureatesService from "../services/prizes-laureates.service.js";
-
 
 export const listPaginatedLaureates = (req, res) => {
     let service = new PrizesLaureatesService();
