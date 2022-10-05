@@ -24,7 +24,7 @@ export const showLaureateFromID = (req, res) => {
         if (error) {
             res.status(400).send({success: 0, data: error});
         }
-        console.log(laureates);
+        //console.log(laureates);
         res.status(200).render('listLaureates.hbs', {laureates});
     });
 }

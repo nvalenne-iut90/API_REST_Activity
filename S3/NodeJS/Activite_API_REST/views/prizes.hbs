@@ -1,26 +1,77 @@
 <div class="container">
-    <div>
+    <div class="container p-2" style="display: flex">
         <div class="col-3">
-            {{#if categories}}
-                <label for="categories"><em>Catégorie du prix Nobel</em></label>
-                <select class="form-select">
+            <label for="categories"><em>Catégorie du prix Nobel</em></label>
+            {{#if objectsPage.listAllCategories}}
+                <select class="form-select" style="width: 90%">
                     <optgroup label="Catégories">
-                        <option selected disabled style="font-style: italic">Choisir une catégorie</option>
-                        {{#each categories}}
+                        <option value="notToUse" selected disabled style="font-style: italic">Choisir une catégorie</option>
+                        {{#each objectsPage.listAllCategories}}
                             <option value="{{this}}">{{this}}</option>
                         {{/each}}
+                    </optgroup>
+                </select>
+            {{else}}
+                <select class="form-select">
+                    <optgroup label="Catégories">
+                        <option selected disabled style="font-style: italic">Aucune option disponible..</option>
                     </optgroup>
                 </select>
             {{/if}}
         </div>
         <div class="col-9">
-
+            <h4>Nombre de lauréats par catégorie :</h4>
+            {{#if objectsPage.countLaureatesByCategories.chemistry }}
+                <p>Chimie : {{objectsPage.countLaureatesByCategories.chemistry}}</p>
+            {{else}}
+                0
+            {{/if}}
+            {{#if objectsPage.countLaureatesByCategories.economics }}
+                <p>Economie : {{objectsPage.countLaureatesByCategories.economics}}</p>
+            {{else}}
+                0
+            {{/if}}
+            {{#if objectsPage.countLaureatesByCategories.literature }}
+                <p>Littérature : {{objectsPage.countLaureatesByCategories.literature}}</p>
+            {{else}}
+                0
+            {{/if}}
+            {{#if objectsPage.countLaureatesByCategories.chemistry }}
+                <p>Paix : {{objectsPage.countLaureatesByCategories.peace}}</p>
+            {{else}}
+                0
+            {{/if}}
+            {{#if objectsPage.countLaureatesByCategories.physics }}
+                <p>Physique : {{objectsPage.countLaureatesByCategories.physics}}</p>
+            {{else}}
+                0
+            {{/if}}
+            {{#if objectsPage.countLaureatesByCategories.medicine }}
+                <p>Médecine : {{objectsPage.countLaureatesByCategories.medicine}}</p>
+            {{else}}
+                0
+            {{/if}}
         </div>
     </div>
-    <div>
-        <table class="table-hover">
-
+    <div class="container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            </tbody>
         </table>
     </div>
-
 </div>
+

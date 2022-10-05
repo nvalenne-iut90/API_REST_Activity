@@ -14,17 +14,23 @@ export default class PrizesMainService {
     async countLaureatesByCategories(callback){
         let prizes = await new FSPrizes().readAllPrizes();
         let categories = [];
-        prizes.forEach((prize) => {
+        let result = {};
+
+        prizes.forEach( prize => {
             if (!(categories.includes(prize.category))){
                 categories.push(prize.category);
             }
         });
-        /*
-        prizes.forEach((prize) => {
 
+        prizes.forEach( prize => {
+            if (result[prize.category] !== undefined){
+                if (prize.laureates !== undefined)
+                    result[prize.category] += prize.laureates.length;
+            } else {
+                result[prize.category] = 0;
+            }
         });
+        //console.log(result);
         return callback(null, result);
-
-         */
     }
 }

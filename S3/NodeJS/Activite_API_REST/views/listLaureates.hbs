@@ -15,9 +15,15 @@
                 <tbody>
                 {{#each laureates}}
                     <tr>
-                        <td class="id">{{this.id}}</td>
-                        <td class="surname">{{this.surname}}</td>
-                        <td class="firstname">{{this.firstname}}</td>
+                        {{#if this.id}}
+                            <td class="id">{{this.id}}</td>
+                        {{/if}}
+                        {{#if this.surname}}
+                            <td class="surname">{{this.surname}}</td>
+                        {{/if}}
+                        {{#if this.firstname}}
+                            <td class="firstname">{{this.firstname}}</td>
+                        {{/if}}
                     </tr>
                 {{/each}}
                 </tbody>
