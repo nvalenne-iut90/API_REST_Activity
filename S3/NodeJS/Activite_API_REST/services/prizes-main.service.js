@@ -1,4 +1,5 @@
 import FSPrizes from "./prizes-fs.service.js"
+import PrizesLaureatesService from "./prizes-laureates.service.js";
 export default class PrizesMainService {
 
     async listAllCategories(callback){
@@ -32,5 +33,28 @@ export default class PrizesMainService {
         });
         //console.log(result);
         return callback(null, result);
+    }
+
+    async countPrizesForEachPerson(callback){ // ça marche mais k-uplons
+        let prizes = await new PrizesLaureatesService().getLaureates();
+        let prizesForEach = [];
+        for (let i = 0; i < prizes.length; i++){
+            let person = prizes[i];
+            let incrPrizes = 0;
+            prizes.forEach(prize => {
+                if ((prize.firstname === person.firstname) && prize.surname === person.surname) {
+                    incrPrizes++;
+                }
+            });
+            prizesForEach.push({
+                firstname: person.firstname,
+                surname: person.surname,
+                nbPrizes: incrPrizes
+            });
+
+            //console.log(person);
+            //console.log(prizesForEach[i]);
+        }
+        return callback(null, prizesForEach);
     }
 }

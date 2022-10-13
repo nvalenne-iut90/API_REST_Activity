@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="container p-2" style="display: flex">
+    <div class="container p-2 mb-3" style="display: flex;">
         <div class="col-3">
             <label for="categories"><em>Catégorie du prix Nobel</em></label>
             {{#if objectsPage.listAllCategories}}
@@ -54,22 +54,23 @@
         </div>
     </div>
     <div class="container">
+        <h4>Nombre de prix remportés par personne/organisme</h4>
         <table class="table table-striped">
             <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Prix gagnés</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-            </tr>
+            {{#each objectsPage.countPrizesForEachPerson}}
+                <tr>
+                    <td>{{this.surname}}</td>
+                    <td>{{this.firstname}}</td>
+                    <td>{{this.nbPrizes}}</td>
+                </tr>
+            {{/each}}
             </tbody>
         </table>
     </div>

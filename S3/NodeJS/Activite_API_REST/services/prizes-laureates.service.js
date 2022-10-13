@@ -21,7 +21,6 @@ export default class PrizesLaureatesService {
         return liste;
     }
     async getPaginatedLaureates(page, limit, callback){
-
         const startIndex = (page - 1) * limit;  // first element to show in the page
         const endIndex = page * limit;          // last element to show in the page
 
