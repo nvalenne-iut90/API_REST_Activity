@@ -19,7 +19,19 @@
                 </select>
             {{/if}}
         </div>
-        <div class="col-9">
+        <div class="col-6">
+            <table class="table table-responsive table-bordered" style="width: 95%">
+                <thead>
+                    <tr>
+                        <th class="surname">Nom</th>
+                        <th class="firstname">Prénom</th>
+                        <th class="year">Année</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="col-3">
             <h4>Nombre de lauréats par catégorie :</h4>
             {{#if objectsPage.countLaureatesByCategories.chemistry }}
                 <p>Chimie : {{objectsPage.countLaureatesByCategories.chemistry}}</p>

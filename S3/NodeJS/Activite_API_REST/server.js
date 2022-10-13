@@ -4,6 +4,7 @@ import {engine} from "express-handlebars";
 import {dirname} from "path";
 import dotenv from 'dotenv';
 import emoji from 'node-emoji';
+import bodyParser from "body-parser";
 
 // Router files
 import {default as router_laureates} from "./routers/laureates_router.js";
@@ -17,6 +18,7 @@ const port = process.env.PORT;
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine('hbs', engine({
     defaultLayout : 'main',
