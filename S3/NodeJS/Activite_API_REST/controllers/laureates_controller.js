@@ -12,8 +12,8 @@ export const listPaginatedLaureates = (req, res) => {
         if (error){
             res.status(400).send({success:0,data:error});
         }
-        res.status(200);
-        res.render('listLaureates.hbs',{laureates});
+        res.status(200).send(laureates);
+        //res.render('listLaureates.hbs',{laureates});
     });
 }
 
@@ -24,8 +24,8 @@ export const showLaureateFromID = (req, res) => {
         if (error) {
             res.status(400).send({success: 0, data: error});
         }
-        //console.log(laureates);
-        res.status(200).render('listLaureates.hbs', {laureates});
+        res.status(200).send(laureates);
+        //res.status(200).render('listLaureates.hbs', {laureates});
     });
 }
 

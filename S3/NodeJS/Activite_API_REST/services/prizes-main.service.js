@@ -57,4 +57,24 @@ export default class PrizesMainService {
         }
         return callback(null, prizesForEach);
     }
+
+    async listAllYearsWhereNotPrizes(callback) {
+        let prizes = await new FSPrizes().readAllPrizes();
+        let years = []
+
+        // TODO Faire F10
+        /*
+        let prizesForYear = []
+        prizes.forEach(prize => {
+            let prize_year = prize.year;
+            if (!years.includes(prize_year)){
+                prizesForYear.push(prize);
+            }
+        });
+        console.log(prizesForYear);
+
+         */
+
+        return callback(null, years);
+    }
 }

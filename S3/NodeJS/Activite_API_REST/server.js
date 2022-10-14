@@ -6,16 +6,16 @@ import dotenv from 'dotenv';
 import emoji from 'node-emoji';
 import bodyParser from "body-parser";
 import swagger_ui from "swagger-ui-express"
+import swaggerJsDoc from "swagger-jsdoc"
+import {fileURLToPath} from "url";
 
 // Router files
 import {default as router_laureates} from "./routers/laureates_router.js";
 import {default as router_prizes} from "./routers/prizes_router.js";
 
-import {fileURLToPath} from "url";
-
 dotenv.config();
-const port = process.env.PORT;
 
+const port = process.env.PORT;
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -26,15 +26,37 @@ app.engine('hbs', engine({
     extname : 'hbs'
 }));
 
-
-import {swaggerDocs} from "./docs/documentation.js";
-
-"./docs/documentation.js";
+const swagger_options = {
+    swaggerDefinition: {
+        openapi : "3.0.0",
+        info: {
+            title: "API REST Documentation",
+            description: "Realised By VALENNE Nathan X TOILLON Samuel",
+            servers: [`http://localhost:${port}`],
+            version: "0.5"
+        }
+    },
+    apis: ["server.js", "./routers/*.js"]
+};
 
 app.set('view engine', 'hbs');
 app.set('views', './views');
 app.use(express.static(__dirname + "/public"));
 
+/**
+ * @swagger
+ * /:
+ *  get:
+ *      description : Show the main page
+ *      tags:
+ *          - Others
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
 app.get("/", (req,res) => {
     let emoji_welcome = emoji.get('wave');
     res.render('accueil.hbs', {emoji_welcome});
@@ -43,7 +65,7 @@ app.get("/", (req,res) => {
 app.use("/laureates", router_laureates);
 app.use("/prizes", router_prizes);
 
-app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerDocs));
+app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerJsDoc(swagger_options)));
 
 app.all("*", (req, res) => {
     let emojis = {
