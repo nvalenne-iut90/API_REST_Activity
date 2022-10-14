@@ -5,6 +5,7 @@ import {dirname} from "path";
 import dotenv from 'dotenv';
 import emoji from 'node-emoji';
 import bodyParser from "body-parser";
+import swagger_ui from "swagger-ui-express"
 
 // Router files
 import {default as router_laureates} from "./routers/laureates_router.js";
@@ -25,6 +26,11 @@ app.engine('hbs', engine({
     extname : 'hbs'
 }));
 
+
+import {swaggerDocs} from "./docs/documentation.js";
+
+"./docs/documentation.js";
+
 app.set('view engine', 'hbs');
 app.set('views', './views');
 app.use(express.static(__dirname + "/public"));
@@ -37,7 +43,9 @@ app.get("/", (req,res) => {
 app.use("/laureates", router_laureates);
 app.use("/prizes", router_prizes);
 
-app.use("*", (req, res) => {
+app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerDocs));
+
+app.all("*", (req, res) => {
     let emojis = {
         "X" : emoji.get('x'),
         "question" : emoji.get('question')
