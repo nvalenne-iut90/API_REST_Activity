@@ -1,0 +1,14 @@
+<%- include ('partials/header.ejs') %>
+<div class="mt-4 p-5 bg-success text-white rounded">
+    <form action="/users/login" method="POST">
+        <h2>Login:</h2>
+        <label for="inputUsername">Username</label>
+        <input type="text" name="user" id="inputUsername"
+               placeholder="Username" class="form-control" required>
+        <label for="inputPassword">Mot de pass</label>
+        <input type="password" name="password" id="inputPassword"
+               ➥ placeholder="Password" class="form-control" required>
+        <button type="submit" class="btn btn-info">Login</button>
+    </form>
+</div>
+<%- include ('partials/footer.ejs') %>
