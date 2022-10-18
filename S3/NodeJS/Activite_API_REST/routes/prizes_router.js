@@ -69,7 +69,7 @@ router_prizes.get("/nb-laureates-per-category", countLaureatesByCategories);    
  *              description : Bad Request
  *
  */
-router_prizes.get("/year-where-not-prizes", listAllYearsWhereNotPrizes);
+router_prizes.get("/year-where-not-prizes", listAllYearsWhereNotPrizes);        //F10
 
 //router.get("/add", add);
 //router.post("/add", validatePrize,insert);

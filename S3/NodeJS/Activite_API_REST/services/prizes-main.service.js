@@ -60,21 +60,26 @@ export default class PrizesMainService {
 
     async listAllYearsWhereNotPrizes(callback) {
         let prizes = await new FSPrizes().readAllPrizes();
-        let years = []
+        let result = []; // Years result
+        let years_loop = [];
 
-        /**
-         * TODO Faire F10
-         */
-        
-        let prizesForYear = []
         prizes.forEach(prize => {
-            let prize_year = prize.year;
-            if (!years.includes(prize_year)){
-                prizesForYear.push(prize);
+            let year = prize.year;
+            if (!years_loop.includes(year)){
+                years_loop.push(year);
+                let listPrizesPerYear = [];
+                prizes.forEach(prize2 => {
+                    if (prize2.year === prize.year){
+                        listPrizesPerYear.push(prize2.laureates);
+                    }
+                });
+                console.log(listPrizesPerYear.filter(i => i === undefined));
+                if (listPrizesPerYear.filter(i => i === undefined).length === 5){ // If 
+                    result.push(year);
+                }
             }
-        });
-        console.log(prizesForYear);
+        })
 
-        return callback(null, years);
+        return callback(null, result);
     }
 }
