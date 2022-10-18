@@ -10,8 +10,8 @@ import swaggerJsDoc from "swagger-jsdoc"
 import {fileURLToPath} from "url";
 
 // Router files
-import {default as router_laureates} from "./routers/laureates_router.js";
-import {default as router_prizes} from "./routers/prizes_router.js";
+import {default as router_laureates} from "./routes/laureates_router.js";
+import {default as router_prizes} from "./routes/prizes_router.js";
 
 dotenv.config();
 
@@ -36,7 +36,7 @@ const swagger_options = {
             version: "0.5"
         }
     },
-    apis: ["server.js", "./routers/*.js"]
+    apis: ["server.js", "./routes/*.js"]
 };
 
 app.set('view engine', 'hbs');
@@ -73,7 +73,7 @@ app.all("*", (req, res) => {
         "question" : emoji.get('question')
     }
     res.render('error404.hbs', {emojis});
-})
+});
 
 app.listen(port, () => {
     console.log(`Le serveur écoute sur le port ${port}` );

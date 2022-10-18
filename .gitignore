@@ -1,4 +1,4 @@
-
-S3/NodeJS/Activite_API_REST/.idea/
-S3/NodeJS/Activite_API_REST/node_modules/
-S3/NodeJS/Activite_API_REST/package-lock.json
+**/*/node_modules/
+**/*/.idea
+**/*/package-lock.json
+**/*/.vscode

@@ -62,8 +62,10 @@ export default class PrizesMainService {
         let prizes = await new FSPrizes().readAllPrizes();
         let years = []
 
-        // TODO Faire F10
-        /*
+        /**
+         * TODO Faire F10
+         */
+        
         let prizesForYear = []
         prizes.forEach(prize => {
             let prize_year = prize.year;
@@ -72,8 +74,6 @@ export default class PrizesMainService {
             }
         });
         console.log(prizesForYear);
-
-         */
 
         return callback(null, years);
     }
