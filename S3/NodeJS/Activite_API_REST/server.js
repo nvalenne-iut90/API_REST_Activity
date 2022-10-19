@@ -43,20 +43,7 @@ app.set('view engine', 'hbs');
 app.set('views', './views');
 app.use(express.static(__dirname + "/public"));
 
-/**
- * @swagger
- * /:
- *  get:
- *      description : Show the main page
- *      tags:
- *          - Others
- *      responses:
- *          '200':
- *              description: A successful result
- *          '400':
- *              description : Bad Request
- *
- */
+
 app.get("/", (req,res) => {
     let emoji_welcome = emoji.get('wave');
     res.render('accueil.hbs', {emoji_welcome});

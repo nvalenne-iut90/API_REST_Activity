@@ -50,4 +50,31 @@ export default class PrizesLaureatesService {
         }
 
     }
+    async countLaureatesByCategories(callback){
+        let prizes = await new FSPrizes().readAllPrizes();
+        let categories = [];
+        let result = {};
+
+        prizes.forEach( prize => {
+            if (!(categories.includes(prize.category))){
+                categories.push(prize.category);
+            }
+        });
+
+        prizes.forEach( prize => {
+            if (result[prize.category] !== undefined){
+                if (prize.laureates !== undefined)
+                    result[prize.category] += prize.laureates.length;
+            } else {
+                result[prize.category] = 0;
+            }
+        });
+        return callback(null, result);
+    }
+    async countLaureatesForEachYear(callback){
+        
+        
+
+        return callback(null, [])
+    }
 }

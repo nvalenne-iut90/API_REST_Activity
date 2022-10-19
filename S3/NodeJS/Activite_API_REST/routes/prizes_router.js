@@ -1,5 +1,5 @@
 import express from "express";
-import {countLaureatesByCategories, countPrizesForEachPerson, listAllCategories, listAllYearsWhereNotPrizes} from "../controllers/prizes_controller.js";
+import {countPrizesForEachPerson, listAllCategories, listAllYearsWhereNotPrizes} from "../controllers/prizes_controller.js";
 
 let router_prizes = express.Router();
 
@@ -36,23 +36,6 @@ router_prizes.get("/nb-prizes-per-person", countPrizesForEachPerson);       //F5
  *
  */
 router_prizes.get("/list-categories", listAllCategories);              //F6
-
-/**
- * @swagger
- * /prizes/nb-laureates-per-category:
- *  get:
- *      summary: F7
- *      description : Returns number of laureates depending on each category
- *      tags:
- *          - Prizes
- *      responses:
- *          '200':
- *              description: A successful result
- *          '400':
- *              description : Bad Request
- *
- */
-router_prizes.get("/nb-laureates-per-category", countLaureatesByCategories);     //F7
 
 /**
  * @swagger

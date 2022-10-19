@@ -12,28 +12,6 @@ export default class PrizesMainService {
         });
         return callback(null, categories);
     }
-    async countLaureatesByCategories(callback){
-        let prizes = await new FSPrizes().readAllPrizes();
-        let categories = [];
-        let result = {};
-
-        prizes.forEach( prize => {
-            if (!(categories.includes(prize.category))){
-                categories.push(prize.category);
-            }
-        });
-
-        prizes.forEach( prize => {
-            if (result[prize.category] !== undefined){
-                if (prize.laureates !== undefined)
-                    result[prize.category] += prize.laureates.length;
-            } else {
-                result[prize.category] = 0;
-            }
-        });
-        //console.log(result);
-        return callback(null, result);
-    }
 
     async countPrizesForEachPerson(callback){ // ça marche mais k-uplons
         let prizes = await new PrizesLaureatesService().getLaureates();

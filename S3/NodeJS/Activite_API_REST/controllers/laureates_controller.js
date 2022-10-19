@@ -1,7 +1,7 @@
 import PrizesLaureatesService from "../services/prizes-laureates.service.js";
+let service = new PrizesLaureatesService();
 
 export const listPaginatedLaureates = (req, res) => {
-    let service = new PrizesLaureatesService();
     let page = req.query.page;
     const limit = 10;
     if (page === undefined || page === ""){
@@ -18,7 +18,6 @@ export const listPaginatedLaureates = (req, res) => {
 }
 
 export const showLaureateFromID = (req, res) => {
-    let service = new PrizesLaureatesService();
     const id = req.params.id;
     service.showLaureate(id, (error, laureates) => {
         if (error) {
@@ -27,6 +26,24 @@ export const showLaureateFromID = (req, res) => {
         res.status(200).send(laureates);
         //res.status(200).render('listLaureates.hbs', {laureates});
     });
+}
+
+export const countLaureatesByCategories = (req, res) => {
+    service.countLaureatesByCategories((error, result) => {
+        if (error) {
+            res.status(400).send({success: 0, data: error});
+        }
+        res.status(200).send(result);
+    });
+}
+
+export const countLaureatesForEachYear = (req, res) => {
+    service.countLaureatesForEachYear((error, result) => {
+        if (error) {
+            res.status(400).send({success:0,data:error});
+        }
+        res.status(200).send(result);
+    })
 }
 
 export const add = (req, res) => {
