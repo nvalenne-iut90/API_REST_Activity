@@ -1,5 +1,5 @@
 import express from "express";
-import {listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear} from "../controllers/laureates_controller.js";
+import {listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, deleteInFile} from "../controllers/laureates_controller.js";
 
 let router_laureates = express.Router();
 
@@ -25,12 +25,13 @@ let router_laureates = express.Router();
  *
  */
 router_laureates.get("/", listPaginatedLaureates);    // F1
+
 /**
  * @swagger
  * /laureates/l/{id}:
  *  get:
  *      summary: F2
- *      description : Show the laureate depending on the id  (the first ten laureates)
+ *      description : Show the laureate depending on the id
  *      tags:
  *          - Laureates
  *      parameters:
@@ -82,6 +83,37 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  */
  router_laureates.get("/nb-laureates-per-year", countLaureatesForEachYear)          //F8
 
-//router.get("/add", add);
-//router.post("/add", validatePrize,insert);
+ /**
+ * @swagger
+ * /laureates/delete:
+ *  delete:
+ *      summary: F13
+ *      description : Delete the laureate depending of year, id, and category
+ *      tags:
+ *          - Laureates
+ *      parameters:
+ *          - in: query
+ *            name: year
+ *            type: integer
+ *            description: Year of the prize
+ *            required: true
+ *          - in: query
+ *            name: id
+ *            type: integer
+ *            description: ID of the laureate
+ *            required: true
+ *          - in: query
+ *            name: category
+ *            type: string
+ *            description: category of the laureate
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
+  router_laureates.delete("/delete", deleteInFile);                                 // F13
+
 export default router_laureates;

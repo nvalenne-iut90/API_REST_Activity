@@ -60,4 +60,29 @@ export default class PrizesMainService {
 
         return callback(null, result);
     }
+
+    async ListPrizesFromLaureateID(callback){
+        /*
+        let result = [
+            {
+                "name" : "Marie Curie",
+                "id" : 1,
+                "prizes" : [
+                    {
+                    "category" : "chemistry",
+                    "année" : "1921",
+                    "motivation" : "bien ouej ma reus"
+                    },
+                    {
+                        "category" : "chemistry",
+                        "année" : "1922",
+                        "motivation" : "bien ouej ma reus bis"
+                        }
+                ]
+            }
+        ];
+        */
+
+        return callback(null, []);
+    }
 }

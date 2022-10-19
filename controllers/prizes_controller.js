@@ -29,3 +29,12 @@ export const listAllYearsWhereNotPrizes = async (req, res) => {
         res.status(200).send(result);
     })
 }
+
+export const ListPrizesFromLaureateID = (req, res) => {
+    service.ListPrizesFromLaureateID((error, result) => {
+        if (error)
+            res.status(400).send({success: 0, data:error});
+        //console.log(result);
+        res.status(200).send(result);
+    })
+}

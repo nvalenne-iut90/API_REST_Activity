@@ -69,12 +69,39 @@ export default class PrizesLaureatesService {
                 result[prize.category] = 0;
             }
         });
+        let mostLaureates = 0;
+        for (const key in result) {
+            if (result[key] > mostLaureates){
+                mostLaureates = result[key];
+                result["hasTheMostLaureates"] = key;
+            }
+        }
+        console.log(result);
         return callback(null, result);
     }
     async countLaureatesForEachYear(callback){
-        
-        
+        let prizes = await new FSPrizes().readAllPrizes();
+        let result = [];
+        let years_loop = [];
 
-        return callback(null, [])
+        prizes.forEach(prize => {
+            let year = prize.year;
+            if (!years_loop.includes(year)){
+                years_loop.push(year);
+                let nbLaureats = 0;
+                prizes.forEach(prize2 => {
+                    if (prize2.year === prize.year && prize2.laureates !== undefined){
+                        nbLaureats += prize2.laureates.length;
+                    }
+                });
+                result.push({
+                    "année" : year,
+                    "nbLaureats": nbLaureats
+                });
+            }
+        })
+
+
+        return callback(null, result);
     }
 }

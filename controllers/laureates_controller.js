@@ -1,5 +1,7 @@
 import PrizesLaureatesService from "../services/prizes-laureates.service.js";
+import FSPrizes from "../services/prizes-fs.service.js";
 let service = new PrizesLaureatesService();
+let serviceFile = new FSPrizes();
 
 export const listPaginatedLaureates = (req, res) => {
     let page = req.query.page;
@@ -47,10 +49,25 @@ export const countLaureatesForEachYear = (req, res) => {
 }
 
 export const add = (req, res) => {
-    res.status(200);
-    res.render("user/add.handlebars");
+    
 }
 
 export const insert = (req, res) => {
-    res.render("user/users.handlebars");
+    
+}
+
+export const deleteInFile = (req, res) => {
+    //TODO
+    let annee = req.query.year;
+    let id = req.query.id;
+    let category = req.query.category;
+    if (annee === undefined || id === undefined || category === undefined)
+        res.status(400).send({success:0, data:"Paramètre manquant"});
+    console.log(annee, id, category);
+    serviceFile.deleteInFile(annee, id, category, (error, result) => {
+        if (error){
+            res.status(400).send({success:0, data:error});
+        }
+        res.status(200).send(result);
+    });
 }

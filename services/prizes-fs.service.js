@@ -29,4 +29,15 @@ export default class FSPrizes{
         }
 
     }
+    async deleteInFile(year, id, category, callback){
+        return callback(null, []);
+    }
+
+    async addInFile(year, category, firstname, surname, callback){
+
+    }
+
+    async updateInFile(motivation, year, category, id, callback){
+
+    }
 }
