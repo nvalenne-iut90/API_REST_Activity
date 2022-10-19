@@ -1,0 +1,45 @@
+<div class="container" id="listeLaureats" style="display: flex;flex-direction: column">
+    <h4>Liste des lauréats</h4>
+    <div class="col-12">
+        <div class="d-inline">
+        </div>
+        <table class="table table-striped table-responsive table-bordered" style="text-align: center">
+            {{#if laureates}}
+                <thead class="th">
+                <tr style="font-size: 20px;">
+                    <th class="id">#</th>
+                    <th class="surname">Nom</th>
+                    <th class="firstname">Prénom</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each laureates}}
+                    <tr>
+                        {{#if this.id}}
+                            <td class="id">{{this.id}}</td>
+                        {{/if}}
+                        {{#if this.surname}}
+                            <td class="surname">{{this.surname}}</td>
+                        {{/if}}
+                        {{#if this.firstname}}
+                            <td class="firstname">{{this.firstname}}</td>
+                        {{/if}}
+                    </tr>
+                {{/each}}
+                </tbody>
+            {{else}}
+                <thead>
+                <tr style="font-size: 20px;">
+                    <th>ID non trouvé</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nous n'avons pas trouvé ce que vous cherchez...</td>
+                    </tr>
+                </tbody>
+            {{/if}}
+        </table>
+    </div>
+</div>
+
