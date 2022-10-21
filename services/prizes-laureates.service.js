@@ -10,13 +10,13 @@ export default class PrizesLaureatesService {
         });
 
         // Extracts laureates from the json file and push them into an array
-        for (let i = 0; i < result.length; i++) {
-            if (result[i].laureates !== undefined) {
-                for (let j = 0; j < result[i].laureates.length; j++) {
-                    liste.push(result[i].laureates[j])
-                }
+        result.forEach(prize => {
+            if (prize.laureates !== undefined) {
+                prize.laureates.forEach(laureate => {
+                    liste.push(laureate)
+                })
             }
-        }
+        });
 
         return liste;
     }
@@ -42,14 +42,33 @@ export default class PrizesLaureatesService {
         result.forEach((laureate) => {  // Gets the element which is matching with id
             if (laureate.id === id){
                 isFound = true;     // the element is found
-                return callback(null, [laureate]);
+                return callback(null, {
+                    "id" : id,
+                    "firstname" : laureate.firstname,
+                    "surname" : laureate.surname
+                });
             }
         });
         if (isFound === false){ // in the case where the element is not found
-            return callback(null, []);
+            return callback("Lauréat non trouvé...", []);
         }
 
     }
+
+    async countLaureates(callback){
+        let laureates = await this.getLaureates();
+        let numberOfLaureates = 0;
+        let laureatesNamesTab = [];
+        laureates.forEach(laureate => {
+            let laureateName = laureate.firstname + " " + laureate.surname;
+            if (!laureatesNamesTab.includes(laureateName)){
+                laureatesNamesTab.push(laureateName);
+                numberOfLaureates += 1;
+            }
+        })
+        return callback(null, numberOfLaureates);
+    }
+
     async countLaureatesByCategories(callback){
         let prizes = await new FSPrizes().readAllPrizes();
         let categories = [];
@@ -59,9 +78,6 @@ export default class PrizesLaureatesService {
             if (!(categories.includes(prize.category))){
                 categories.push(prize.category);
             }
-        });
-
-        prizes.forEach( prize => {
             if (result[prize.category] !== undefined){
                 if (prize.laureates !== undefined)
                     result[prize.category] += prize.laureates.length;
@@ -79,6 +95,7 @@ export default class PrizesLaureatesService {
         console.log(result);
         return callback(null, result);
     }
+
     async countLaureatesForEachYear(callback){
         let prizes = await new FSPrizes().readAllPrizes();
         let result = [];

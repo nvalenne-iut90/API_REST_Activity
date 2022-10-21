@@ -13,14 +13,19 @@ export default class PrizesMainService {
         return callback(null, categories);
     }
 
+    async countPrizes(callback){
+        let prizes = await new FSPrizes().readAllPrizes();
+        return callback(null, prizes.length);
+    }
+
     async countPrizesForEachPerson(callback){ // ça marche mais k-uplons
-        let prizes = await new PrizesLaureatesService().getLaureates();
+        let laureates = await new PrizesLaureatesService().getLaureates();
         let prizesForEach = [];
-        for (let i = 0; i < prizes.length; i++){
-            let person = prizes[i];
+        for (let i = 0; i < laureates.length; i++){
+            let person = laureates[i];
             let incrPrizes = 0;
-            prizes.forEach(prize => {
-                if ((prize.firstname === person.firstname) && prize.surname === person.surname) {
+            laureates.forEach(laureate => {
+                if ((laureate.firstname === person.firstname) && laureate.surname === person.surname) {
                     incrPrizes++;
                 }
             });
@@ -61,28 +66,41 @@ export default class PrizesMainService {
         return callback(null, result);
     }
 
-    async ListPrizesFromLaureateID(callback){
-        /*
-        let result = [
-            {
-                "name" : "Marie Curie",
-                "id" : 1,
-                "prizes" : [
-                    {
-                    "category" : "chemistry",
-                    "année" : "1921",
-                    "motivation" : "bien ouej ma reus"
-                    },
-                    {
-                        "category" : "chemistry",
-                        "année" : "1922",
-                        "motivation" : "bien ouej ma reus bis"
-                        }
-                ]
-            }
-        ];
-        */
+    async ListPrizesFromLaureateID(idLaureate, callback){
 
-        return callback(null, []);
+        let result = [], laureatePrizes = [];
+        let prizes = await new FSPrizes().readAllPrizes(), laureates = await new PrizesLaureatesService().getLaureates();
+        let laureateFirstName, laureateSurName, isFound = false;
+        
+        for(let i = 0; i < laureates.length; i++) {
+            if (laureates[i].id == idLaureate){
+                isFound = true;
+                laureateFirstName = laureates[i].firstname, laureateSurName = laureates[i].surname;
+                break
+            }
+        };
+        if (isFound == false){
+            return callback("Laureat non trouvé...", [])
+        }
+        prizes.forEach(prize => {
+            if (prize.laureates !== undefined){
+                prize.laureates.forEach(laureate => {
+                    if (laureateFirstName == laureate.firstname && laureateSurName == laureate.surname){
+                        laureatePrizes.push({
+                            "category" : prize.category,
+                            "year" : prize.year,
+                            "motivation" : laureate.motivation
+                        });
+                    }
+                })
+            }
+        });
+        //console.log(laureatePrizes);
+        result.push({
+            "name" : laureateFirstName + " " + laureateSurName,
+            "prizes" : laureatePrizes
+        })
+
+        return callback(null, result);
     }
 }

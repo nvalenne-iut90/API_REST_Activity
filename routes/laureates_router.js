@@ -1,5 +1,5 @@
 import express from "express";
-import {listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, deleteInFile} from "../controllers/laureates_controller.js";
+import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, deleteInFile} from "../controllers/laureates_controller.js";
 
 let router_laureates = express.Router();
 
@@ -48,6 +48,23 @@ router_laureates.get("/", listPaginatedLaureates);    // F1
  *
  */
 router_laureates.get("/l/:id", showLaureateFromID);   // F2
+
+/**
+ * @swagger
+ * /laureates/count:
+ *  get:
+ *      summary: F4
+ *      description : Count number of laureates
+ *      tags:
+ *          - Laureates
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
+ router_laureates.get("/count", countLaureates);    // F4
 
 /**
  * @swagger

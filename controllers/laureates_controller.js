@@ -11,9 +11,8 @@ export const listPaginatedLaureates = (req, res) => {
     }  // if page is not defined => display the content of page 1
 
     service.getPaginatedLaureates(page, limit, (error, laureates) => {
-        if (error){
+        if (error)
             res.status(400).send({success:0,data:error});
-        }
         res.status(200).send(laureates);
         //res.render('listLaureates.hbs',{laureates});
     });
@@ -21,29 +20,33 @@ export const listPaginatedLaureates = (req, res) => {
 
 export const showLaureateFromID = (req, res) => {
     const id = req.params.id;
-    service.showLaureate(id, (error, laureates) => {
-        if (error) {
+    service.showLaureate(id, (error, laureate) => {
+        if (error)
             res.status(400).send({success: 0, data: error});
-        }
-        res.status(200).send(laureates);
+        res.status(200).send([laureate]);
         //res.status(200).render('listLaureates.hbs', {laureates});
+    });
+}
+
+export const countLaureates = (req, res) => {
+    service.countLaureates((error, result) => {
+        //console.log(result);
+        res.status(200).send(result.toString())
     });
 }
 
 export const countLaureatesByCategories = (req, res) => {
     service.countLaureatesByCategories((error, result) => {
-        if (error) {
+        if (error)
             res.status(400).send({success: 0, data: error});
-        }
         res.status(200).send(result);
     });
 }
 
 export const countLaureatesForEachYear = (req, res) => {
     service.countLaureatesForEachYear((error, result) => {
-        if (error) {
+        if (error)
             res.status(400).send({success:0,data:error});
-        }
         res.status(200).send(result);
     })
 }
@@ -65,9 +68,8 @@ export const deleteInFile = (req, res) => {
         res.status(400).send({success:0, data:"Paramètre manquant"});
     console.log(annee, id, category);
     serviceFile.deleteInFile(annee, id, category, (error, result) => {
-        if (error){
+        if (error)
             res.status(400).send({success:0, data:error});
-        }
         res.status(200).send(result);
     });
 }
