@@ -10,7 +10,7 @@ export class Prize{
     }
     // GETTERS AND SETTERS
     get year(){return this[_prize_year];}
-    set year(year){return this[this[_prize_year]] = year;}
+    set year(year){return this[_prize_year] = year;}
     get category(){return this[_prize_category];}
     set category(category){return this[_prize_category] = category;}
     get laureates(){ return this[_prize_laureates]; }

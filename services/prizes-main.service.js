@@ -15,7 +15,13 @@ export default class PrizesMainService {
 
     async countPrizes(callback){
         let prizes = await new FSPrizes().readAllPrizes();
-        return callback(null, prizes.length);
+        let nbPrizes = 0;
+        prizes.forEach(prize => {
+            if (!(prize.laureates === undefined)){
+                nbPrizes++;
+            }
+        })
+        return callback(null,nbPrizes.toString());
     }
 
     async countPrizesForEachPerson(callback){ // ça marche mais k-uplons
@@ -56,7 +62,6 @@ export default class PrizesMainService {
                         listPrizesPerYear.push(prize2.laureates);
                     }
                 });
-                console.log(listPrizesPerYear.filter(i => i === undefined));
                 if (listPrizesPerYear.filter(i => i === undefined).length === 5){ // If 
                     result.push(year);
                 }

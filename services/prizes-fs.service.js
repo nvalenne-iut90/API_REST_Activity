@@ -1,28 +1,21 @@
 import fs from "fs"
-import {Prize} from "../models/main_models.js";
+//import {Prize} from "../models/main_models.js";
 
 export default class FSPrizes{
-    async listLaureates(callback){
-        const prizes = await this.readAllPrizes();
-        if (prizes.length === 0){
-            return callback([]);
-        }
-        let results = [];
-        prizes.forEach((prize) => {
-            results.push(JSON.parse(prize.JSON));
-        });
-        return callback(null, results);
-    }
-    async readAllPrizes(){
+    readAllPrizes(){
         try {
             const dataBuffer = fs.readFileSync("prize.json");
-            let dataJSON = dataBuffer.toString();
-            dataJSON = JSON.parse(dataJSON);
+            //let dataJSON = dataBuffer.toString();
+            let dataJSON = JSON.parse(dataBuffer);
+            //console.log(dataJSON);
             const prizes = []
+            /*
             dataJSON.forEach((prize) => {
                 prizes.push(Prize.fromJSON(prize))
             });
-            return prizes;
+            */
+            //return prizes;
+            return dataJSON;    //TEST
         } catch (e) {
             console.log(e);
             return [];
@@ -30,7 +23,25 @@ export default class FSPrizes{
 
     }
     async deleteInFile(year, id, category, callback){
-        return callback(null, []);
+        let prizes = this.readAllPrizes();
+        let isFound = false;
+        prizes.forEach(prize => {
+            if (prize.category == category && prize.year == year){
+                prize.laureates.forEach(laureate => {
+                    if (laureate.id == id){
+                        isFound = true;
+                        let indexLaureate = prize.laureates.indexOf(laureate);
+                        prize.laureates.splice(indexLaureate, 1);
+                    
+                        return callback(null, prizes);
+                    }
+                })
+            }
+        })
+        if (!isFound){
+            return callback("Laureat non trouvé...",[]);
+        }
+        
     }
 
     async addInFile(year, category, firstname, surname, callback){

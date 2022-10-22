@@ -2,15 +2,17 @@ import FSPrizes from "./prizes-fs.service.js"
 export default class PrizesLaureatesService {
     async getLaureates() {
         // Gets the content of the json file
-        let prizes = await new FSPrizes().readAllPrizes();
+        let prizes = new FSPrizes().readAllPrizes();
         let result = [];
         let liste = [];
+        /*
         prizes.forEach((prize) => { // Parsing the content into a json object
             result.push(JSON.parse(prize.JSON));
         });
+        */      //TEST
 
         // Extracts laureates from the json file and push them into an array
-        result.forEach(prize => {
+        prizes.forEach(prize => {
             if (prize.laureates !== undefined) {
                 prize.laureates.forEach(laureate => {
                     liste.push(laureate)

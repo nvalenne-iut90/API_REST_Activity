@@ -5,7 +5,7 @@ export const countPrizes = (req, res) => {
     service.countPrizes((error, result) => {
         if (error)
             res.status(400).send({success: 0, data: error})
-        res.status(200).send(result.toString())
+        res.status(200).send(result)
     });
 }
 
