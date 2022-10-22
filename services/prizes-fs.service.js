@@ -48,7 +48,23 @@ export default class FSPrizes{
 
     }
 
-    async updateInFile(motivation, year, category, id, callback){
-
+    async updateMotivation(newMotivation, year, category, id, callback){
+        let prizes = this.readAllPrizes();
+        let isFound = false;
+        prizes.forEach(prize => {
+            if (prize.category == category && prize.year == year){
+                prize.laureates.forEach(laureate => {
+                    if (laureate.id == id){
+                        isFound = true;
+                        laureate.motivation = newMotivation;
+                    
+                        return callback(null, prizes);
+                    }
+                })
+            }
+        })
+        if (!isFound){
+            return callback("Laureat non trouvé...",[]);
+        }
     }
 }

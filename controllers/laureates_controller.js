@@ -52,7 +52,24 @@ export const countLaureatesForEachYear = (req, res) => {
     })
 }
 
-export const add = (req, res) => {
+export const updateMotivation = (req, res) => {
+    let annee = req.query.year;
+    let id = req.query.id;
+    let category = req.query.category;
+    let motivation = req.query.motivation
+    if (annee === undefined || id === undefined || category === undefined || motivation === undefined)
+        res.status(400).send({success:0, data:"Paramètre manquant"});
+    serviceFile.updateMotivation(motivation, annee, id, category, (error, content) => {
+        if (error){
+            res.status(400).send(error);
+        } else {
+            fs.writeFile("prize.json", JSON.stringify(content), (err) => {
+                if (err) throw err;
+                console.log("Le laureat a été supprimé avec succès");
+            });
+            res.status(200).send("Lauréat mis à jour avec succès !");
+        }
+    });
     
 }
 
@@ -66,7 +83,7 @@ export const deleteInFile = (req, res) => {
     let category = req.query.category;
     if (annee === undefined || id === undefined || category === undefined)
         res.status(400).send({success:0, data:"Paramètre manquant"});
-    console.log(annee, id, category);
+    //console.log(annee, id, category);
     serviceFile.deleteInFile(annee, id, category, (error, content) => {
         if (error){
             res.status(400).send(error)

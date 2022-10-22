@@ -1,5 +1,5 @@
 import express from "express";
-import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, deleteInFile} from "../controllers/laureates_controller.js";
+import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, deleteInFile, updateMotivation} from "../controllers/laureates_controller.js";
 
 let router_laureates = express.Router();
 
@@ -132,5 +132,43 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  *
  */
   router_laureates.delete("/delete", deleteInFile);                                 // F13
+
+   /**
+ * @swagger
+ * /laureates/update-motivation:
+ *  put:
+ *      summary: F14
+ *      description : Update the laureate's motivation depending of year, id, and category
+ *      tags:
+ *          - Laureates
+ *      parameters:
+ *          - in: query
+ *            name: year
+ *            type: integer
+ *            description: Year of the prize
+ *            required: true
+ *          - in: query
+ *            name: id
+ *            type: integer
+ *            description: ID of the laureate
+ *            required: true
+ *          - in: query
+ *            name: category
+ *            type: string
+ *            description: category of the laureate
+ *            required: true
+ *          - in: query
+ *            name: motivation
+ *            type: string
+ *            description: the new motivation
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
+  router_laureates.put("/update-motivation", updateMotivation)
 
 export default router_laureates;
