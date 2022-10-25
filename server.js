@@ -12,6 +12,7 @@ import {fileURLToPath} from "url";
 // Router files
 import {default as router_laureates} from "./routes/laureates_router.js";
 import {default as router_prizes} from "./routes/prizes_router.js";
+import {default as router_views} from "./routes/views_router.js";
 
 dotenv.config();
 
@@ -51,6 +52,7 @@ app.get("/", (req,res) => {
 
 app.use("/laureates", router_laureates);
 app.use("/prizes", router_prizes);
+app.use("/views", router_views);
 
 app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerJsDoc(swagger_options)));
 

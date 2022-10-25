@@ -1,7 +1,7 @@
-import express from "express";
+import { Router } from "express";
 import {countPrizes, countPrizesForEachPerson, listAllCategories, listAllYearsWhereNotPrizes, ListPrizesFromLaureateID} from "../controllers/prizes_controller.js";
 
-let router_prizes = express.Router();
+let router_prizes = Router();
 
 /**
  * @swagger
@@ -94,6 +94,5 @@ router_prizes.get("/prizes-from-id/:id", ListPrizesFromLaureateID);             
  */
 router_prizes.get("/year-where-not-prizes", listAllYearsWhereNotPrizes);        //F10
 
-//router.get("/add", add);
-//router.post("/add", validatePrize,insert);
+
 export default router_prizes;

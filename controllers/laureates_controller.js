@@ -1,6 +1,7 @@
 import PrizesLaureatesService from "../services/prizes-laureates.service.js";
 import FSPrizes from "../services/prizes-fs.service.js";
 import fs from "fs"
+import { gzipSync } from "zlib";
 let service = new PrizesLaureatesService();
 let serviceFile = new FSPrizes();
 
@@ -25,7 +26,6 @@ export const showLaureateFromID = (req, res) => {
         if (error)
             res.status(400).send({success: 0, data: error});
         res.status(200).send([laureate]);
-        //res.status(200).render('listLaureates.hbs', {laureates});
     });
 }
 
@@ -46,6 +46,17 @@ export const countLaureatesByCategories = (req, res) => {
 
 export const countLaureatesForEachYear = (req, res) => {
     service.countLaureatesForEachYear((error, result) => {
+        if (error)
+            res.status(400).send({success:0,data:error});
+        res.status(200).send(result);
+    })
+}
+
+export const laureateFilter = (req, res) => {
+    let firstname = req.query.firstname;
+    let surname = req.query.surname;
+    let category = req.query.category;
+    service.laureateFilter(firstname, surname, category, (error, result) => {
         if (error)
             res.status(400).send({success:0,data:error});
         res.status(200).send(result);
@@ -73,8 +84,20 @@ export const updateMotivation = (req, res) => {
     
 }
 
-export const insert = (req, res) => {
-    
+export const newLaureate = (req, res) => {
+    let year = req.query.year, category = req.query.category, firstname = req.query.firstname, surname = req.query.surname, motivation = req.query.motivation
+    serviceFile.addInFile(year, category, firstname, surname, motivation, (error, laureate) => {
+        if (error){
+            res.status(400).send(error)
+        } else {
+            //console.log(content);
+            fs.writeFile("prize.json", JSON.stringify(laureate), (err) => {
+                if (err) throw err;
+                console.log("Le laureat a été ajouté avec succès");
+            });
+            res.status(200).send("Lauréat ajouté avec succès !");
+        }
+    })
 }
 
 export const deleteInFile = (req, res) => {

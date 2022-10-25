@@ -5,16 +5,8 @@ export default class FSPrizes{
     readAllPrizes(){
         try {
             const dataBuffer = fs.readFileSync("prize.json");
-            //let dataJSON = dataBuffer.toString();
             let dataJSON = JSON.parse(dataBuffer);
-            //console.log(dataJSON);
             const prizes = []
-            /*
-            dataJSON.forEach((prize) => {
-                prizes.push(Prize.fromJSON(prize))
-            });
-            */
-            //return prizes;
             return dataJSON;    //TEST
         } catch (e) {
             console.log(e);
@@ -44,8 +36,63 @@ export default class FSPrizes{
         
     }
 
-    async addInFile(year, category, firstname, surname, callback){
+    async addInFile(year, category, firstname, surname, motivation, callback){
+        let prizes = this.readAllPrizes();
+        let maxId = 0;
+        prizes.forEach(prize => {
+            if (prize.laureates !== undefined){
+                prize.laureates.forEach(laureate => {
+                    if (parseInt(laureate.id) > parseInt(maxId)) maxId = laureate.id;
+                })
+            }
+        })
+        let idNewLaureate = parseInt(maxId)+1;
+        prizes.forEach(prize => {
+            if (prize.category == category && prize.year == year){
+                if (prize.laureates === undefined) {
+                    prize.laureates.push({
+                        "id" : idNewLaureate,
+                        "firstname": firstname,
+                        "surname": surname,
+                        "motivation": motivation,
+                        "share":0
+                    });
+                    return callback(null, prizes);
+                }
+                else {
+                    prizes.forEach(prize2 => {
+                        if (prize2.laureates !== undefined){
+                            prize2.laureates.forEach(laureate2 => {
+                                if (laureate2.firstname == firstname && laureate2.surname == surname){
+                                    idNewLaureate = laureate2.id;
+                                }
+                            })
+                        }
+                    })
+                    let isHere = false;
+                    prize.laureates.forEach(laureate => {
+                        if (laureate.firstname == firstname && laureate.surname == surname){
+                            isHere = true;
+                        }
+                    })
+                    if (!isHere){
+                        prize.laureates.push({
+                            "id" : idNewLaureate,
+                            "firstname": firstname,
+                            "surname": surname,
+                            "motivation": motivation,
+                            "share":0
+                        });
+                        return callback(null, prizes);
+                    }
+                    else {
+                        return callback(null, prizes);
+                    }
+                }
+            }
+        })
 
+        return callback(null, prizes);
     }
 
     async updateMotivation(newMotivation, year, category, id, callback){
@@ -68,3 +115,12 @@ export default class FSPrizes{
         }
     }
 }
+/*
+prize.laureates.push({
+    "id" : idNewLaureate,
+    "firstname": firstname,
+    "surname": surname,
+    "motivation": motivation,
+    "share":0
+})
+*/

@@ -1,5 +1,5 @@
 import express from "express";
-import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, deleteInFile, updateMotivation} from "../controllers/laureates_controller.js";
+import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, laureateFilter, deleteInFile, updateMotivation, newLaureate} from "../controllers/laureates_controller.js";
 
 let router_laureates = express.Router();
 
@@ -102,6 +102,39 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
 
  /**
  * @swagger
+ * /laureates/filter:
+ *  get:
+ *      summary: F12
+ *      description : Show the laureate depending of the filter
+ *      tags:
+ *          - Laureates
+ *      parameters:
+ *          - in: query
+ *            name: firstname
+ *            type: string
+ *            description: Firstname of the laureate
+ *            required: false
+ *          - in: query
+ *            name: surname
+ *            type: string
+ *            description: Surname of the laureate
+ *            required: false
+ *          - in: query
+ *            name: category
+ *            type: string
+ *            description: category of the laureate
+ *            required: false
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
+  router_laureates.get("/filter", laureateFilter);                                 // F12
+
+ /**
+ * @swagger
  * /laureates/delete:
  *  delete:
  *      summary: F13
@@ -169,6 +202,49 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  *              description : Bad Request
  *
  */
-  router_laureates.put("/update-motivation", updateMotivation)
+  router_laureates.put("/update-motivation", updateMotivation)        //F14
+
+  /**
+ * @swagger
+ * /laureates/new:
+ *  put:
+ *      summary: F15
+ *      description : Add a new laureate
+ *      tags:
+ *          - Laureates
+ *      parameters:
+ *          - in: query
+ *            name: year
+ *            type: integer
+ *            description: Year of the prize
+ *            required: true
+ *          - in: query
+ *            name: category
+ *            type: string
+ *            description: category of the laureate
+ *            required: true
+ *          - in: query
+ *            name: firstname
+ *            type: string
+ *            description: firstname of the laureate
+ *            required: true
+ *          - in: query
+ *            name: surname
+ *            type: string
+ *            description: surname of the laureate
+ *            required: true
+ *          - in: query
+ *            name: motivation
+ *            type: string
+ *            description: motivation of the laureate
+ *            required: true
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
+router_laureates.put("/new", newLaureate)         //F15
 
 export default router_laureates;

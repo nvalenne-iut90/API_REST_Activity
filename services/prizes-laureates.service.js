@@ -22,6 +22,25 @@ export default class PrizesLaureatesService {
 
         return liste;
     }
+
+    getLaureatesByCategory(category, callback) {
+        let prizes = new FSPrizes().readAllPrizes();
+        let liste = [];
+        prizes.forEach(prize => {
+            if (prize.laureates !== undefined && prize.category === category) {
+                prize.laureates.forEach(laureate => {
+                    liste.push({
+                        'firstname' : laureate.firstname,
+                        'surname' : laureate.surname,
+                        'year' : prize.year,
+                    })
+                })
+            }
+        });
+        //console.log(liste);
+        return callback(null, liste)
+    }
+
     async getPaginatedLaureates(page, limit, callback){
         const startIndex = (page - 1) * limit;  // first element to show in the page
         const endIndex = page * limit;          // last element to show in the page
@@ -122,5 +141,37 @@ export default class PrizesLaureatesService {
 
 
         return callback(null, result);
+    }
+
+    async laureateFilter (firstname, surname, category, callback) {
+        let prizes = new FSPrizes().readAllPrizes();
+        let result;
+        let cate = {};
+        let first = {};
+        let sur = {};
+        if (category !== undefined){
+            prizes.forEach(prize =>{
+                if (prize.category == category){
+                    if (prize.laureates !== undefined){
+                        cate.push(prize.laureates)
+                    }
+                }
+            })
+        }
+        else {
+            prizes.forEach(prize => {
+                if (prize.laureates !== undefined){
+                    cate.push(prize.laureates)
+                }
+            })
+        }
+        if (firstname !== undefined){
+                cate.forEach(cat => {
+                    cat.forEach(cat2 => {
+                        
+                    })
+                })
+        }
+        
     }
 }

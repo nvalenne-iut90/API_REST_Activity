@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="col-3">
+        <form action="/views/view1" method="POST">
+            <select name="categorie" class="form-select">
+                <option value="notToUse" selected disabled style="font-style: italic">Choisir une catégorie</option>
+                    {{#each categories}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+            </select>
+            <button type="submit" class="btn btn-info">Envoyer</button>
+        </form>
+    </div>
+    <div class="col-9">
+        <table class="table table-responsive" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th class="firstname">Prénom</th>
+                    <th class="surname">Nom</th>
+                    <th class="year">Année</th>
+                </th>
+            </thead>
+            <tbody>
+                {{#each laureates}}
+                    <tr>
+                        <td class="firstname">{{this.firstname}}</td>
+                        <td class="surname">{{this.surname}}</td>
+                        <td class="year">{{this.year}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
