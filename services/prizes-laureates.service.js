@@ -143,17 +143,61 @@ export default class PrizesLaureatesService {
         return callback(null, result);
     }
 
+    sortLaureates(sorting, callback) {
+        let prizes = new FSPrizes().readAllPrizes()
+        let result = [];
+        let years_loop = [];
+
+        prizes.forEach(prize => {
+            let year = prize.year;
+            if (!years_loop.includes(year) && prize.laureates !== undefined){
+                years_loop.push(year);
+                let nbLaureats = 0;
+                prizes.forEach(prize2 => {
+                    if (prize2.year === prize.year && prize2.laureates !== undefined){
+                        nbLaureats += prize2.laureates.length;
+                    }
+                });
+                result.push({
+                    "annee" : year,
+                    "nbLaureats": nbLaureats
+                });
+            }
+        })
+
+        if (sorting == "+laureates"){
+            result.sort(function compare(a, b) {
+                if (a.nbLaureats < b.nbLaureats)
+                   return -1;
+                if (a.nbLaureats > b.nbLaureats )
+                    return 1;
+                return 0;
+            });
+        } else if (sorting == "-laureates"){
+            result.sort(function compare(a, b) {
+                if (a.nbLaureats > b.nbLaureats)
+                   return -1;
+                if (a.nbLaureats < b.nbLaureats)
+                   return 1;
+                return 0;
+            });
+            
+        } else {
+            return callback("Choisissez entre +laureates et -laureates, réessayez...", null)
+        }
+        return callback(null, result)
+    }
+
     async laureateFilter (firstname, surname, category, callback) {
         let prizes = new FSPrizes().readAllPrizes();
-        let result;
-        let cate = {};
-        let first = {};
-        let sur = {};
+        let cate = [];
+        let first = [];
+        let sur = [];
         if (category !== undefined){
             prizes.forEach(prize =>{
                 if (prize.category == category){
                     if (prize.laureates !== undefined){
-                        cate.push(prize.laureates)
+                        cate.push(...prize.laureates)
                     }
                 }
             })
@@ -161,17 +205,33 @@ export default class PrizesLaureatesService {
         else {
             prizes.forEach(prize => {
                 if (prize.laureates !== undefined){
-                    cate.push(prize.laureates)
+                    cate.push(...prize.laureates)
                 }
             })
         }
         if (firstname !== undefined){
                 cate.forEach(cat => {
-                    cat.forEach(cat2 => {
-                        
-                    })
+                    if (cat.firstname == firstname){
+                        first.push(cat)
+                    }
                 })
         }
+        else {
+            first.push(...cate)
+        }
+
+        if (surname !== undefined){
+            first.forEach(first1 => {
+                if (first1.surname == surname){
+                    sur.push(first1)
+                }
+            })
+        }
+        else {
+            sur.push(...first)
+        }
+
+        return callback(null, sur)
         
     }
 }

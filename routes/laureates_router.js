@@ -1,5 +1,5 @@
 import express from "express";
-import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, countLaureatesForEachYear, laureateFilter, deleteInFile, updateMotivation, newLaureate} from "../controllers/laureates_controller.js";
+import {countLaureates, listPaginatedLaureates, showLaureateFromID, countLaureatesByCategories, sortLaureates, countLaureatesForEachYear, laureateFilter, deleteInFile, updateMotivation, newLaureate} from "../controllers/laureates_controller.js";
 
 let router_laureates = express.Router();
 
@@ -100,6 +100,30 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  */
  router_laureates.get("/nb-laureates-per-year", countLaureatesForEachYear)          //F8
 
+/**
+ * @swagger
+ * /laureates/sort-year:
+ *  get:
+ *      summary: F11
+ *      description : Return a sorted list depending on number of laureates
+ *      parameters:
+ *          - in : query
+ *            name: sorting
+ *            schema:
+ *              type : string
+ *              enum : ['+laureates', '-laureates']
+ *          
+ *      tags:
+ *          - Laureates
+ *      responses:
+ *          '200':
+ *              description: A successful result
+ *          '400':
+ *              description : Bad Request
+ *
+ */
+ router_laureates.get("/sort-year", sortLaureates)          //F11
+
  /**
  * @swagger
  * /laureates/filter:
@@ -121,8 +145,10 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  *            required: false
  *          - in: query
  *            name: category
- *            type: string
  *            description: category of the laureate
+ *            schema:
+ *              type : string
+ *              enum : ['chemistry', 'physics', 'peace', 'economics', 'medicine', 'literature']
  *            required: false
  *      responses:
  *          '200':
@@ -207,7 +233,7 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
   /**
  * @swagger
  * /laureates/new:
- *  put:
+ *  post:
  *      summary: F15
  *      description : Add a new laureate
  *      tags:
@@ -220,7 +246,9 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  *            required: true
  *          - in: query
  *            name: category
- *            type: string
+ *            schema:
+ *              type : string
+ *              enum : ['chemistry', 'physics', 'peace', 'economics', 'medicine', 'literature']
  *            description: category of the laureate
  *            required: true
  *          - in: query
@@ -245,6 +273,6 @@ router_laureates.get("/l/:id", showLaureateFromID);   // F2
  *              description : Bad Request
  *
  */
-router_laureates.put("/new", newLaureate)         //F15
+router_laureates.post("/new", newLaureate)         //F15
 
 export default router_laureates;

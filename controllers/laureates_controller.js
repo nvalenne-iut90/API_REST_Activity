@@ -40,7 +40,7 @@ export const countLaureatesByCategories = (req, res) => {
     service.countLaureatesByCategories((error, result) => {
         if (error)
             res.status(400).send({success: 0, data: error});
-        res.status(200).send(result);
+        else res.status(200).send(result);
     });
 }
 
@@ -48,7 +48,17 @@ export const countLaureatesForEachYear = (req, res) => {
     service.countLaureatesForEachYear((error, result) => {
         if (error)
             res.status(400).send({success:0,data:error});
-        res.status(200).send(result);
+        else
+            res.status(200).send(result);
+    })
+}
+
+export const sortLaureates = (req, res) => {
+    let sorting = req.query.sorting;
+    service.sortLaureates(sorting, (error, result) => {
+        if (error)
+            res.status(400).send({success:0, data:error})
+        else res.status(200).send(result)
     })
 }
 

@@ -77,11 +77,11 @@ export default class FSPrizes{
                     })
                     if (!isHere){
                         prize.laureates.push({
-                            "id" : idNewLaureate,
+                            "id" : idNewLaureate.toString(),
                             "firstname": firstname,
                             "surname": surname,
                             "motivation": motivation,
-                            "share":0
+                            "share":"0"
                         });
                         return callback(null, prizes);
                     }

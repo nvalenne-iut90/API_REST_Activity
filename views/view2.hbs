@@ -1,0 +1,16 @@
+<div class="container">
+    <div class="col-3">
+        <form action="/views/view1" method="POST">
+            <select name="categorie" class="form-select mb-3">
+                <option value="notToUse" selected disabled style="font-style: italic">Choisir une catégorie</option>
+                    {{#each categories}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/each}}
+            </select>
+            <button type="submit" class="btn btn-info">Envoyer</button>
+        </form>
+    </div>
+    <div class="col-9">
+        
+    </div>
+</div>

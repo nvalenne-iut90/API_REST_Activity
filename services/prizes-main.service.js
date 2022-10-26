@@ -2,8 +2,8 @@ import FSPrizes from "./prizes-fs.service.js"
 import PrizesLaureatesService from "./prizes-laureates.service.js";
 export default class PrizesMainService {
 
-    async listAllCategories(callback){
-        let prizes = await new FSPrizes().readAllPrizes();
+    listAllCategories(callback){
+        let prizes = new FSPrizes().readAllPrizes();
         let categories = [];
         prizes.forEach((prize) => {     // add a category if not in categories array
             if (!(categories.includes(prize.category))){
