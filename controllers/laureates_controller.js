@@ -86,7 +86,6 @@ export const updateMotivation = (req, res) => {
         } else {
             fs.writeFile("prize.json", JSON.stringify(content), (err) => {
                 if (err) throw err;
-                console.log("Le laureat a été supprimé avec succès");
             });
             res.status(200).send("Lauréat mis à jour avec succès !");
         }
@@ -100,7 +99,7 @@ export const newLaureate = (req, res) => {
         if (error){
             res.status(400).send(error)
         } else {
-            //console.log(content);
+            console.log(laureate);
             fs.writeFile("prize.json", JSON.stringify(laureate), (err) => {
                 if (err) throw err;
                 console.log("Le laureat a été ajouté avec succès");

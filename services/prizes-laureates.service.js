@@ -187,7 +187,7 @@ export default class PrizesLaureatesService {
         }
         return callback(null, result)
     }
-
+    
     async laureateFilter (firstname, surname, category, callback) {
         let prizes = new FSPrizes().readAllPrizes();
         let cate = [];
@@ -197,7 +197,15 @@ export default class PrizesLaureatesService {
             prizes.forEach(prize =>{
                 if (prize.category == category){
                     if (prize.laureates !== undefined){
-                        cate.push(...prize.laureates)
+                        //cate.push(...prize.laureates)
+                        prize.laureates.forEach(l => cate.push({
+                            "id" : l.id,
+                            "year" : prize.year,
+                            "firstname" : l.firstname,
+                            "surname" : l.surname,
+                            "motivation" : l.motivation,
+                            "share" : l.share
+                        }))
                     }
                 }
             })
@@ -205,7 +213,14 @@ export default class PrizesLaureatesService {
         else {
             prizes.forEach(prize => {
                 if (prize.laureates !== undefined){
-                    cate.push(...prize.laureates)
+                    prize.laureates.forEach(l => cate.push({
+                        "id" : l.id,
+                        "year" : prize.year,
+                        "firstname" : l.firstname,
+                        "surname" : l.surname,
+                        "motivation" : l.motivation,
+                        "share" : l.share
+                    }))
                 }
             })
         }

@@ -1,16 +1,27 @@
 <div class="container">
-    <div class="col-3">
-        <form action="/views/view1" method="POST">
+    <form action="/views/view2" method="POST">
+    <div class="row">
+        <div class="col-3">
             <select name="categorie" class="form-select mb-3">
                 <option value="notToUse" selected disabled style="font-style: italic">Choisir une catégorie</option>
-                    {{#each categories}}
-                        <option value="{{this}}">{{this}}</option>
-                    {{/each}}
+                {{#each categories}}
+                    <option value="{{this}}">{{this}}</option>
+                {{/each}}
             </select>
-            <button type="submit" class="btn btn-info">Envoyer</button>
-        </form>
+        </div>
+        <div class="col-9">
+        <div style="display: flex;flex-direction:column">
+            <label for="year">Année</label>
+            <input name="year">
+            <label for="firstname">Prénom</label>
+            <input name="firstname">
+            <label for="surname">Nom</label>
+            <input name="surname">
+            <label for="motivation">Motivation</label>
+            <input name="motivation">
+            <button type="submit" class="btn bg-success m-4" style="color:white">Créer le nouveau lauréat</button>
+        </div>
     </div>
-    <div class="col-9">
-        
     </div>
+    </form>
 </div>

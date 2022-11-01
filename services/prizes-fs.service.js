@@ -51,7 +51,7 @@ export default class FSPrizes{
             if (prize.category == category && prize.year == year){
                 if (prize.laureates === undefined) {
                     prize.laureates.push({
-                        "id" : idNewLaureate,
+                        "id" : idNewLaureate.toString(),
                         "firstname": firstname,
                         "surname": surname,
                         "motivation": motivation,
@@ -95,7 +95,7 @@ export default class FSPrizes{
         return callback(null, prizes);
     }
 
-    async updateMotivation(newMotivation, year, category, id, callback){
+    async updateMotivation(newMotivation, year, id, category, callback){
         let prizes = this.readAllPrizes();
         let isFound = false;
         prizes.forEach(prize => {
