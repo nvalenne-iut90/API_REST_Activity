@@ -31,12 +31,12 @@ export default class FSPrizes{
             }
         })
         if (!isFound){
-            return callback("Laureat non trouvé...",[]);
+            return callback("Laureat not found...",[]);
         }
         
     }
 
-    async addInFile(year, category, firstname, surname, motivation, callback){
+    addInFile(year, category, firstname, surname, motivation, callback){
         let prizes = this.readAllPrizes();
         let maxId = 0;
         prizes.forEach(prize => {
@@ -111,16 +111,7 @@ export default class FSPrizes{
             }
         })
         if (!isFound){
-            return callback("Laureat non trouvé...",[]);
+            return callback("Laureate not found...",[]);
         }
     }
 }
-/*
-prize.laureates.push({
-    "id" : idNewLaureate,
-    "firstname": firstname,
-    "surname": surname,
-    "motivation": motivation,
-    "share":0
-})
-*/

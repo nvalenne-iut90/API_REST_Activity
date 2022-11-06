@@ -79,7 +79,7 @@ export const updateMotivation = (req, res) => {
     let category = req.query.category;
     let motivation = req.query.motivation
     if (annee === undefined || id === undefined || category === undefined || motivation === undefined)
-        res.status(400).send({success:0, data:"Paramètre manquant"});
+        res.status(400).send({success:0, data:"Missing parameter"});
     serviceFile.updateMotivation(motivation, annee, id, category, (error, content) => {
         if (error){
             res.status(400).send(error);
@@ -87,7 +87,7 @@ export const updateMotivation = (req, res) => {
             fs.writeFile("prize.json", JSON.stringify(content), (err) => {
                 if (err) throw err;
             });
-            res.status(200).send("Lauréat mis à jour avec succès !");
+            res.status(200).send("Laureate updated successfully !");
         }
     });
     
@@ -99,12 +99,10 @@ export const newLaureate = (req, res) => {
         if (error){
             res.status(400).send(error)
         } else {
-            console.log(laureate);
             fs.writeFile("prize.json", JSON.stringify(laureate), (err) => {
                 if (err) throw err;
-                console.log("Le laureat a été ajouté avec succès");
             });
-            res.status(200).send("Lauréat ajouté avec succès !");
+            res.status(200).send("The laureate has been added successfully!");
         }
     })
 }
@@ -114,7 +112,7 @@ export const deleteInFile = (req, res) => {
     let id = req.query.id;
     let category = req.query.category;
     if (annee === undefined || id === undefined || category === undefined)
-        res.status(400).send({success:0, data:"Paramètre manquant"});
+        res.status(400).send({success:0, data:"Missing parameter"});
     //console.log(annee, id, category);
     serviceFile.deleteInFile(annee, id, category, (error, content) => {
         if (error){
@@ -123,9 +121,9 @@ export const deleteInFile = (req, res) => {
             //console.log(content);
             fs.writeFile("prize.json", JSON.stringify(content), (err) => {
                 if (err) throw err;
-                console.log("Le laureat a été supprimé avec succès");
+                console.log("Laureate has been deleted successfully");
             });
-            res.status(200).send("Lauréat supprimé avec succès !");
+            res.status(200).send("Laureate has been deleted successfully");
         }
     });
 }

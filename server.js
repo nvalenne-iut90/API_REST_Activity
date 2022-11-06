@@ -27,6 +27,9 @@ app.engine('hbs', engine({
     extname : 'hbs'
 }));
 
+/**
+ * Config options for swagger
+ */
 const swagger_options = {
     swaggerDefinition: {
         openapi : "3.0.0",
@@ -54,9 +57,10 @@ app.use("/laureates", router_laureates);
 app.use("/prizes", router_prizes);
 app.use("/views", router_views);
 
-app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerJsDoc(swagger_options)));
 
-app.all("*", (req, res) => {
+app.use("/api-docs", swagger_ui.serve, swagger_ui.setup(swaggerJsDoc(swagger_options))); 
+
+app.all("*", (req, res) => {    // if url not found
     let emojis = {
         "X" : emoji.get('x'),
         "question" : emoji.get('question')
@@ -65,5 +69,6 @@ app.all("*", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Le serveur écoute sur le port ${port}` );
+    console.log("Project API REST - Octobre/Novembre 2022\nRealised by VALENNE Nathan and TOILLON Samuel\n");
+    console.log(`The server listens on port ${port}` );
 });

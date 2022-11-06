@@ -1,33 +1,6 @@
-import PrizesLaureatesService from "../services/prizes-laureates.service.js"
-import PrizesMainService from "../services/prizes-main.service.js"
-import FSPrizes from "../services/prizes-fs.service.js";
 import fetch from "node-fetch";
 
-let serviceFile = new FSPrizes();
-let prizes = new PrizesMainService();
-let laureates = new PrizesLaureatesService();
-
 export const showContentT1 = async (req, res) => {
-    /*
-    let content = {}
-    let category = req.query.categorie;
-    console.log(category);
-    await prizes.listAllCategories((error, categories) => {
-        //console.log(categories);
-        if (error) 
-            console.log(error);
-        content["categories"] = categories;
-    });
-    await laureates.getLaureatesByCategory(category, (error, laureates) => {
-        //console.log(laureates);
-        if (error) 
-            console.log(error);
-        content["laureates"] = laureates;
-    })
-    console.log(content);
-
-    res.render("view1.hbs", content);
-    */
     let content = {}
     let category = req.query.categorie;
     const categories = await fetch(`http://localhost:3000/prizes/list-categories`)
@@ -39,34 +12,21 @@ export const showContentT1 = async (req, res) => {
     res.render("view1.hbs", content);
 }
 
-export const showContentT2 = (req, res) => {
+export const showContentT2 = async (req, res) => {
     let category = req.query.categorie;
-    console.log(category);
-    prizes.listAllCategories((error, categories) => {
-        //console.log(categories);
-        if (error) 
-            console.log(error);
-        res.render("view2.hbs", {categories});
-    });
+    const content = await fetch(`http://localhost:3000/prizes/list-categories`)
+    let categories = await content.json()
+    res.render("view2.hbs", {categories});
     
 }
 
-export const addContentT2 = (req, res) => {
-    let category = req.body.categorie;
-    let year = req.body.year;
-    let firstname = req.body.firstname;
-    let surname = req.body.surname;
-    let motivation = req.body.motivation;
-    /*
-    FSPrizes.addContentT2(year, categorie, firstname, surname, motivation, (error ,result) => {
-        if (error) {
-            console.log(error);
-            res.render("view2.hbs", {error});
-        }else{
-            message = "success"
-            res.render("view2.hbs", {message});
-        }
+export const addContentT2 = async (req, res) => {
+    let category = req.body.categorie, year = req.body.year
+        , firstname = req.body.firstname, surname = req.body.surname, motivation = req.body.motivation;
+    await fetch(`http://localhost:3000/laureates/new?year=${year}&category=${category}&firstname=${firstname}&surname=${surname}&motivation=${motivation}`, {
+        method : 'POST'
     })
-    */
+    .then(res.redirect("/views/view2"))
+    .then(console.log("The laureate has been added !"))
     
 }

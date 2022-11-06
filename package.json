@@ -23,7 +23,6 @@
     "swagger-ui-express": "^4.5.0",
     "validator": "^13.7.0"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nvalenne-iut90/API_REST_Activity.git"
