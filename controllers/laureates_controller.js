@@ -8,15 +8,14 @@ let serviceFile = new FSPrizes();
 export const listPaginatedLaureates = (req, res) => {
     let page = req.query.page;
     const limit = 10;
-    if (page === undefined || page === ""){
+    if (page === undefined || page === "" || page <= 0){
         page = 1;
-    }  // if page is not defined => display the content of page 1
+    }  // if page is not defined OR page < 1 => display the content of page 1
 
     service.getPaginatedLaureates(page, limit, (error, laureates) => {
         if (error)
             res.status(400).send({success:0,data:error});
         res.status(200).send(laureates);
-        //res.render('listLaureates.hbs',{laureates});
     });
 }
 

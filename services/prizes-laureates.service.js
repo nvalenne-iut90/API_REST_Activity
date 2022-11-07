@@ -45,11 +45,11 @@ export default class PrizesLaureatesService {
         const startIndex = (page - 1) * limit;  // first element to show in the page
         const endIndex = page * limit;          // last element to show in the page
 
-        let result = await this.getLaureates();
+        let result = await this.getLaureates();        
 
-        // Gets >limit< elements from the array to show them in the HTML table according to the page
+        // Gets <limit> elements from the array to show them in the HTML table according to the page
         result = result.slice(startIndex, endIndex);
-        //console.log(liste)    // test
+        //console.log(result)    // test
 
         return callback(null, result);   // return no errors and the content of the HTML table
 
